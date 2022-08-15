@@ -1,0 +1,7 @@
+{
+  "name": "JogatinaApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
