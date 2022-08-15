@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="menu-content" when="xs" [disabled]="true">
+    <ion-menu contentId="menu-content"  menuId="pizzaMenu" side="start" type="overlay">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Awesome pizza menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        Awesome pizza content
+      </ion-content>
+      <ion-footer>
+        Awesome pizza footer
+      </ion-footer>
+    </ion-menu>
+
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>
