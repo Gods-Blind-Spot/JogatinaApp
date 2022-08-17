@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,8 +12,13 @@ export class SignInPage implements OnInit {
   data;
 
   loginForm = this.formBuilder.group({
-    email: new FormControl(null),
-    password: new FormControl(null),
+    email: new FormControl('vini.ithalo@gmail.com', [Validators.email, Validators.required]),
+    password: new FormControl(null,
+      [
+        Validators.required,
+        Validators.min(8),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&_-])[A-Za-z\d$@$!%*?&].{0,}$')
+      ]),
     remember: new FormControl<boolean>(false, {nonNullable: true})
   });
 
@@ -23,8 +28,13 @@ export class SignInPage implements OnInit {
 
   ngOnInit() {
     this.loginForm.valueChanges.subscribe(
-      data => this.data = data
+      data => {
+        this.data = { data, valid: this.loginForm.valid };
+        // document.getElementById('submit-bttn').
+      }
     );
   }
+
+
 
 }
