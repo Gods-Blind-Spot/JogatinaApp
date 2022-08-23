@@ -3,13 +3,24 @@
 
     <ion-menu contentId="menu-content" menuId="menu-content" side="start" type="overlay">
       <ion-header>
-        <div class="profile">
-
-        </div>
       </ion-header>
       <ion-content>
-        start
       </ion-content>
+      <ion-footer>
+
+        <div *ngIf="!this.loggedIn" class="profile flex items-center px-6 py-8">
+          <button [routerLink]="['account/sign-in']" routerLinkActive="router-link-active" >aaaaaaa</button>
+        </div>
+
+        <div *ngIf="this.loggedIn" class="profile flex items-center px-6 py-8">
+          <img
+          (click)="logout()"
+          class="h-12 rounded-full"
+          src="https://source.boringavatars.com/marble/120/Maria%20Mitchell?square&colors=264653"
+          >
+          <span id="profile-name" class="h-fit w-fit ml-4">{{this.userData.username}}</span>
+        </div>
+      </ion-footer>
     </ion-menu>
 
     <ion-router-outlet id="menu-content"></ion-router-outlet>

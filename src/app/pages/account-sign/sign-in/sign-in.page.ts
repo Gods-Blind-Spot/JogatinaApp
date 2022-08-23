@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -9,20 +11,22 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class SignInPage implements OnInit {
 
+  loggedIn: boolean;
   data;
 
   loginForm = this.formBuilder.group({
-    email: new FormControl('vini.ithalo@gmail.com', [Validators.email, Validators.required]),
+    email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null,
       [
         Validators.required,
         Validators.min(8),
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&_-])[A-Za-z\d$@$!%*?&].{0,}$')
-      ]),
-    remember: new FormControl<boolean>(false, {nonNullable: true})
+      ])
   });
 
   constructor(
+    private router: Router,
+    private auth: AuthService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -35,6 +39,9 @@ export class SignInPage implements OnInit {
     );
   }
 
-
-
+  async login() {
+    await this.auth.login(this.loginForm.value.email, this.loginForm.value.password).then(
+      (data) => console.log(data)
+    );
+  }
 }
