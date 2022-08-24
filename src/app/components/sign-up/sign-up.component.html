@@ -1,35 +1,32 @@
-<ion-content>
-  <pre class="text-center">{{this.data | json }}</pre>
-  <div class="m-5">
-    <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
-      <form [formGroup]="registerForm">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="form-group mb-6">
-            <input type="text"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-primary-shade bg-white bg-clip-padding rounded transition ease-in-out m-0 border-primary-tint focus:text-primary-default focus:bg-white focus:border-primary-shade focus:outline-none placeholder:text-primary-tint"
-              id="exampleInput123" aria-describedby="emailHelp123" placeholder="Nome Completo" formControlName="fullname"/>
-          </div>
-          <div class="form-group mb-6">
-            <input type="date"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-primary-shade bg-white bg-clip-padding rounded transition ease-in-out m-0 border-primary-tint focus:text-primary-default focus:bg-white focus:border-primary-shade focus:outline-none placeholder:text-primary-tint"
-              id="exampleInput124" aria-describedby="Birthday" formControlName="birthdate"/>
-          </div>
-        </div>
-        <div class="form-group mb-6">
-          <input type="email"
-            class="form-control block w-full px-3 py-1.5 text-base font-normal text-primary-shade bg-white bg-clip-padding rounded transition ease-in-out m-0 border-primary-tint focus:text-primary-default focus:bg-white focus:border-primary-shade focus:outline-none placeholder:text-primary-tint"
-            id="exampleInput125" placeholder="Email address" formControlName="email" />
-        </div>
-        <div class="form-group mb-6">
-          <input type="password"
-            class="form-control block w-full px-3 py-1.5 text-base font-normal text-primary-shade bg-white bg-clip-padding rounded transition ease-in-out m-0 border-primary-tint focus:text-primary-default focus:bg-white focus:border-primary-shade focus:outline-none placeholder:text-primary-tint"
-            id="exampleInput126" placeholder="Password" formControlName="password"/>
-        </div>
-        <button type="submit"
-          class="w-full px-6 py-2.5 font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-primary-tint hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-default active:shadow-lg transition duration-150 ease-in-out" (click)="submit()">
-          Sign up
-        </button>
-      </form>
+<div class="block p-6 rounded-lg max-w-sm mx-auto mt-12">
+  <form [formGroup]="registerForm">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="form-group mb-6">
+        <input type="text"
+          class="block w-full border-0 transition ease-in-out border-b-2 border-b-primary-default focus:text-primary-default focus:outline-none"
+          id="" aria-describedby="emailHelp123" placeholder="Nome Completo" formControlName="fullname" />
+      </div>
+      <div class="form-group mb-6">
+        <input type="date"
+          class="block w-full border-0 transition ease-in-out border-b-2 border-b-primary-default focus:text-primary-default focus:outline-none"
+          id="exampleInput124" aria-describedby="Birthday" formControlName="birthdate" />
+      </div>
     </div>
-  </div>
-</ion-content>
+    <div class="form-group mb-6">
+      <input type="email"
+        class="block w-full border-0 transition ease-in-out border-b-2 border-b-primary-default focus:text-primary-default focus:outline-none"
+        id="exampleInput125" placeholder="Email address" formControlName="email" />
+    </div>
+    <div class="form-group mb-6">
+      <input type="password"
+        class="block w-full border-0 transition ease-in-out border-b-2 border-b-primary-default focus:text-primary-default focus:outline-none"
+        id="exampleInput126" placeholder="Password" formControlName="password" />
+    </div>
+    <div class="flex justify-center">
+      <ion-button type="submit" (click)="submit()" [disabled]="!registerForm.valid"
+        class="w-48 transition ease-in-out disabled:bg-primary-shade">
+        Sign up
+      </ion-button>
+    </div>
+  </form>
+</div>
