@@ -9,7 +9,7 @@
       <ion-footer>
 
         <div *ngIf="!this.loggedIn" class="profile flex items-center px-6 py-8">
-          <button [routerLink]="['account/sign-in']" routerLinkActive="router-link-active" >aaaaaaa</button>
+          <button (click)="login()">LOGIN</button>
         </div>
 
         <div *ngIf="this.loggedIn" class="profile flex items-center px-6 py-8">

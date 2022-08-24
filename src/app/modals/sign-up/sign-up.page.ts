@@ -1,5 +1,5 @@
-import { UiUtilsService } from './../../../services/ui-utils.service';
-import { DatabaseService } from './../../../services/database.service';
+import { UiUtilsService } from 'src/app/services/ui-utils.service';
+import { DatabaseService } from 'src/app/services/database.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';

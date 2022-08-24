@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignInPage implements OnInit {
 
   loggedIn: boolean;
-  data;
+  testData;
 
   loginForm = this.formBuilder.group({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -33,11 +33,11 @@ export class SignInPage implements OnInit {
   ngOnInit() {
     this.loginForm.valueChanges.subscribe(
       data => {
-        this.data = { data, valid: this.loginForm.valid };
+        this.testData = { data, valid: this.loginForm.valid };
         // document.getElementById('submit-bttn').
       }
-    );
-  }
+      );
+    }
 
   async login() {
     await this.auth.login(this.loginForm.value.email, this.loginForm.value.password).then(

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlertController, Animation, AnimationController } from '@ionic/angular';
 import { alertShakyEnterAnimation } from '../anim/enter.animation';
-
+import { DataUtilsService as DUtilsService } from 'src/app/services/data-utils.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,13 +44,13 @@ export class UiUtilsService {
       buttons: [
         {
           text: 'Confirmar',
-          handler: () => true,
           cssClass: [destructiveCss],
+          role: 'true'
         },
         {
           text: 'Cancelar',
-          handler: () => false,
           cssClass: [''],
+          role: 'false'
         },
       ]
     });
@@ -58,6 +58,6 @@ export class UiUtilsService {
     await alert.present();
 
     const data = await alert.onDidDismiss();
-    return data;
+    return DUtilsService.toBoolean(data.role);
   }
 }

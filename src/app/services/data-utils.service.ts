@@ -6,5 +6,11 @@ import { Injectable } from '@angular/core';
 
 export class DataUtilsService {
 
-  constructor() { }
+  static toBoolean(str: string) {
+    if (str.toLowerCase() === 'true') {
+      return true;
+    }
+
+    return false;
+  }
 }

@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountSignPage implements OnInit {
 
+  // TODO: Alternate state between login and register
+  // TODO: Register page design
+
   constructor() { }
 
   ngOnInit() {

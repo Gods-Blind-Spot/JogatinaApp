@@ -1,6 +1,8 @@
+import { SignUpComponent } from './../../components/sign-up/sign-up.component';
+import { SignInComponent } from 'src/app/components/sign-in/sign-in.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +15,9 @@ import { AccountSignPage } from './account-sign.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountSignPageRoutingModule
+    AccountSignPageRoutingModule,
+    SignInComponent,
+    SignUpComponent
   ],
   declarations: [AccountSignPage]
 })

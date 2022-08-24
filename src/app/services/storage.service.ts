@@ -1,3 +1,4 @@
+import { EStorage } from './../enum/storate.enum';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
@@ -6,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class StorageService {
 
-  private _storage: Storage;
+  private _storage: Promise<Storage>;
 
   constructor(
     private storage: Storage
@@ -15,22 +16,20 @@ export class StorageService {
    }
 
    public async set(key: string, value: any) {
-     this._storage.set(key, value);
+     (await this._storage).set(key, value);
      return { key, value };
    }
 
    public async get(key: string) {
-     return this._storage.get(key);
+     return (await this._storage).get(key);
    }
 
    public async remove(key: string) {
-    this._storage.remove(key);
+    (await this._storage).remove(key);
    }
 
    async init() {
-    const storage = await this.storage.create();
+    const storage = this.storage.create();
     this._storage = storage;
   }
-
-
 }

@@ -19,7 +19,7 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const data = await this.http.post<{ token: string }>(environment.apiUrl + 'auth/login', { email, password }).toPromise();
-    return this._setSession(data.token);
+    return await this._setSession(data.token);
   }
 
   logout() {
@@ -32,18 +32,22 @@ export class AuthService {
 
   //#region private methods
 
-  private _setSession(token: string) {
-
+  private async _setSession(token: string) {
     const tokenDec = JSON.parse(atob((token.split('.')[1])));
-    this.storage.set(EStorage.LOGIN, { id: tokenDec.id, token, expireAt: tokenDec.exp });
+    await this.storage.set(EStorage.LOGIN, { id: tokenDec.id, token, expireAt: tokenDec.exp });
     return true;
   }
 
 
   private async _getExpiration() {
-    const expiresAt: number = (await this.storage.get(EStorage.LOGIN) as LoginData).expireAt;
+    const data = await this.storage.get(EStorage.LOGIN);
 
-    return expiresAt;
+    if (data) {
+      const expiresAt: number = data.expireAt;
+      return expiresAt;
+    }
+
+    return NaN;
   }
 
   //#endregion
