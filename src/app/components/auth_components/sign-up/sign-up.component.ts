@@ -1,6 +1,7 @@
+import { EAccountPages } from './../../../enum/all.enum';
 import { UiUtilsService } from 'src/app/services/ui-utils.service';
 import { DatabaseService } from 'src/app/services/database.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { UserDetails } from 'src/app/interfaces/user-details';
@@ -20,13 +21,14 @@ import { CommonModule } from '@angular/common';
 })
 export class SignUpComponent implements OnInit {
 
-  data;
+  @Output()
+  registeredEvent = new EventEmitter();
 
   registerForm = this.formBuilder.group({
-    fullname: new FormControl('Vinícius Ithalo', [Validators.required]),
-    username: new FormControl('Vinii', [Validators.required]),
+    fullname: new FormControl(null, [Validators.required]),
+    username: new FormControl('test', [Validators.required]),
     birthdate: new FormControl<Date>(null, [Validators.required]),
-    email: new FormControl('vini.ithalo@gmail.com', [Validators.email, Validators.required]),
+    email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null,
       [
         Validators.required,
@@ -36,20 +38,12 @@ export class SignUpComponent implements OnInit {
   });
 
   constructor(
-    private modalController: ModalController,
     private dataApi: DatabaseService,
     private formBuilder: FormBuilder,
     private uiUtil: UiUtilsService
   ) { }
 
-  ngOnInit() {
-    this.registerForm.valueChanges.subscribe(
-      value => {
-        this.data = { value, valid: this.registerForm.valid };
-        // document.getElementById('submit-bttn').
-      }
-    );
-  }
+  ngOnInit() {}
 
   async submit() {
     await this.uiUtil.confirmAlert('a', 'a', 'a', true, true );
@@ -63,7 +57,11 @@ export class SignUpComponent implements OnInit {
       password: formValue.password,
       birthdate: formValue.birthdate
     }).then(
-      (data: UserDetails) => this.modalController.dismiss()
+      (data: UserDetails) => {
+        if (data.id) {
+          this.registeredEvent.next(EAccountPages.LOGIN);
+        }
+      }
     );
   }
 

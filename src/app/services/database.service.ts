@@ -1,4 +1,4 @@
-import { EStorage } from './../enum/storate.enum';
+import { EStorage } from '../enum/all.enum';
 import { Storage } from '@ionic/storage-angular';
 import { ApiError } from './../interfaces/api-error';
 import { UserDetails } from './../interfaces/user-details';
@@ -24,7 +24,7 @@ export class DatabaseService {
     try {
       this.token = (await this.storage.get(EStorage.LOGIN)).token;
     } catch (error) {
-
+      this.token = ''
     }
 
     const httpOptions = {
@@ -48,7 +48,7 @@ export class DatabaseService {
     try {
       this.token = (await this.storage.get(EStorage.LOGIN)).token;
     } catch (error) {
-
+      this.token = ''
     }
 
     const httpOptions = {

@@ -1,9 +1,10 @@
+import { EAccountPages } from 'src/app/enum/all.enum';
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-    imports: [
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -20,8 +21,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  loggedIn: boolean;
-  testData;
+  @Output()
+  loginEvent = new EventEmitter();
 
   loginForm = this.formBuilder.group({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -34,16 +35,25 @@ export class SignInComponent implements OnInit {
   });
 
   constructor(
-    private router: Router,
+    private modalCtrl: ModalController,
     private auth: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() { }
 
   async login() {
     await this.auth.login(this.loginForm.value.email, this.loginForm.value.password).then(
-      (data) => this.router.navigateByUrl('')
+      async (data) => {
+        await this.router.navigate(['']);
+        await this.modalCtrl.dismiss();
+      }
     );
+  }
+
+  async reset() {
+    this.loginEvent.next(EAccountPages.FORGET);
   }
 }

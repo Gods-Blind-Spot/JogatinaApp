@@ -1,12 +1,34 @@
-<ion-content>
+<ion-content [scrollY]="false">
 
   <header class="flex justify-center">
     <img src="../../../assets/jogatina-logo.png" alt=""
     class="w-3/4">
   </header>
 
-  <app-sign-in></app-sign-in>
-  <app-sign-up></app-sign-up>
+  <main class="max-w-sm mx-auto mt-12">
+    <app-sign-up (registeredEvent)="showPage($event)" *ngIf="this.actualPage === 'REGISTER'"></app-sign-up>
+    <app-sign-in (loginEvent)="showPage($event)" *ngIf="this.actualPage === 'LOGIN'"></app-sign-in>
+    <app-sign-reset (resetEvent)="showPage($event)" *ngIf="this.actualPage === 'FORGET'" ></app-sign-reset>
+  </main>
+
+  <div class="max-w-sm mx-auto">
+    <div *ngIf="this.actualPage === 'LOGIN'"
+    class="p-6 absolute bottom-10">
+      <p>Ainda não tem uma conta?</p>
+      <p><a class="text-primary-default"
+         (click)="showPage('REGISTER')">Registre-se</a></p>
+    </div>
+
+    <div *ngIf="this.actualPage === 'REGISTER'"
+    class="p-6 absolute bottom-10">
+      <p>Já tem uma conta?</p>
+      <p><a class="text-primary-default"
+         (click)="showPage('LOGIN')">Faça login</a></p>
+    </div>
+  </div>
+
+
+
 
   <!-- <app-sign-up></app-sign-up> -->
 

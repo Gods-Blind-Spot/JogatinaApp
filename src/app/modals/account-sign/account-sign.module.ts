@@ -1,5 +1,6 @@
-import { SignUpComponent } from './../../components/sign-up/sign-up.component';
-import { SignInComponent } from 'src/app/components/sign-in/sign-in.component';
+import { SignUpComponent } from 'src/app/components/auth_components/sign-up/sign-up.component';
+import { SignInComponent } from 'src/app/components/auth_components/sign-in/sign-in.component';
+import { SignResetComponent } from "src/app/components/auth_components/sign-reset/sign-reset.component";
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,8 @@ import { AccountSignPage } from './account-sign.page';
     IonicModule,
     AccountSignPageRoutingModule,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignResetComponent,
   ],
   declarations: [AccountSignPage]
 })

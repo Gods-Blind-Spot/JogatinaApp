@@ -1,0 +1,20 @@
+<div class="block p-6">
+  <form [formGroup]="resetForm">
+
+    <div class="form-group mb-6">
+      <label for="exampleInputEmail2" class="form-label inline-block mb-2 text-gray-700">Email</label>
+      <input type="email" formControlName="email"
+        class="block w-full border-0 transition ease-in-out border-b-2 border-b-primary-default focus:text-primary-default focus:outline-none"
+        id="InputEmail" aria-describedby="emailHelp" placeholder="nome@exemplo.com" />
+    </div>
+
+    <div class="flex justify-center">
+      <ion-button (click)="reset()" [disabled]="!resetForm.valid" *ngIf="!this.password"
+      id="submit-bttn" class="w-48 transition ease-in-out disabled:bg-primary-shade">
+        Enviar link
+      </ion-button>
+
+      <p *ngIf="this.password">{{this.password}}</p>
+    </div>
+  </form>
+</div>

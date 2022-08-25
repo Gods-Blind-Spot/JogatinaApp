@@ -1,4 +1,3 @@
-import { EStorage } from './../enum/storate.enum';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 

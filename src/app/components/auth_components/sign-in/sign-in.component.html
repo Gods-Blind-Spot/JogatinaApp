@@ -1,4 +1,4 @@
-<div class="block p-6 rounded-lg max-w-sm mx-auto mt-12">
+<div class="block p-6">
   <form [formGroup]="loginForm">
 
     <div class="form-group mb-6">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="flex justify-between items-center mb-6">
-      <a href="#!" class="">Esqueci a senha</a>
+      <a (click)="reset()" class="">Esqueci a senha</a>
     </div>
 
     <div class="flex justify-center">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EAccountPages } from 'src/app/enum/all.enum';
 
 @Component({
   selector: 'app-account-sign',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountSignPage implements OnInit {
 
+  actualPage = EAccountPages.LOGIN.toString();
+
   // TODO: Alternate state between login and register
   // TODO: Register page design
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
+  showPage(pageToShow: string) {
+    console.log(pageToShow);
+
+    this.actualPage = pageToShow;
+  }
 }

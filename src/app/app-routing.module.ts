@@ -7,7 +7,7 @@ const routes: Routes = [
   //   loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   // }
   {
-    path: '',
+    path: 'accounts',
     loadChildren: () => import('./modals/account-sign/account-sign.module').then( m => m.AccountSignPageModule)
   },
 

@@ -1,10 +1,11 @@
-import { EStorage } from './../enum/storate.enum';
+import { EStorage } from 'src/app/enum/all.enum';
 import { StorageService } from './storage.service';
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, throwError, } from 'rxjs';
 import { LoginData } from '../interfaces/login-data';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,53 @@ import { LoginData } from '../interfaces/login-data';
 
 export class AuthService {
 
+  private _isLoggedIn = new BehaviorSubject<boolean>(false);
+
   constructor(
+    private platform: Platform,
     private storage: StorageService,
     private http: HttpClient
-  ) { }
+  ) {
+    this.platform.ready().then(() => {
+      this.ifLoggedIn();
+    });
+  }
 
   async login(email: string, password: string) {
     const data = await this.http.post<{ token: string }>(environment.apiUrl + 'auth/login', { email, password }).toPromise();
-    return await this._setSession(data.token);
+    console.log(data);
+
+    if (data.token) {
+      await this._setSession(data.token).then(()=>this._isLoggedIn.next(true));
+    }
   }
 
   logout() {
-    this.storage.remove(EStorage.LOGIN);
+    this.storage.remove(EStorage.LOGIN).then(
+      () => this._isLoggedIn.next(false)
+    );
   }
 
-  async isLoggedIn() {
-    return await this._getExpiration() < Date.now();
+  async reset(email: string) {
+    return await this.http.post(environment.apiUrl + 'auth/reset', { email }).toPromise().then(
+      (res: any) => res.password
+    );
+  }
+
+  isAuthenticated() {
+    return this._isLoggedIn;
   }
 
   //#region private methods
+
+  private async ifLoggedIn() {
+    const expiration = await this._getExpiration() < Date.now();
+    console.log(expiration);
+
+    if (expiration) {
+      this._isLoggedIn.next(true);
+    }
+  }
 
   private async _setSession(token: string) {
     const tokenDec = JSON.parse(atob((token.split('.')[1])));
@@ -49,6 +78,5 @@ export class AuthService {
 
     return NaN;
   }
-
   //#endregion
 }
