@@ -50,6 +50,16 @@ export class AuthService {
     return this._isLoggedIn;
   }
 
+  async getAuthToken() {
+    const data = (await this.storage.get(EStorage.LOGIN));
+
+    if (data) {
+      return data.token;
+    }
+
+    return null
+  }
+
   //#region private methods
 
   private async ifLoggedIn() {
