@@ -9,13 +9,19 @@ const routes: Routes = [
   // }
   {
     path: 'accounts',
+    title: 'accounts',
     loadChildren: () => import('./modals/account-sign/account-sign.module').then( m => m.AccountSignPageModule)
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
+    title: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [AuthGuard]
+  },  {
+    path: 'config',
+    loadChildren: () => import('./pages/config/config.module').then( m => m.ConfigPageModule)
   },
+
 
 
 ];

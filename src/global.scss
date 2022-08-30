@@ -40,6 +40,16 @@ textarea:focus, input:focus{
 
 /* Styles for programatically generated components */
 
+ion-popover {
+  --width: auto !important;
+  --height: auto !important;
+
+  &.profile-opts {
+    --offset-y: -15px
+  }
+}
+
+
 // Alert
 .alert-wrapper {
   &.confirm-alert {

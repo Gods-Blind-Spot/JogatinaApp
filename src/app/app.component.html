@@ -12,14 +12,16 @@
           <button (click)="login()">LOGIN</button>
         </div>
 
-        <div *ngIf="this.loggedIn" class="profile flex items-center px-6 py-8">
-          <img
-          (click)="logout()"
-          class="h-12 rounded-full"
-          src="../assets/R.jpg"
-          >
-          <span id="profile-name" class="h-fit w-fit ml-4">{{this.userData.username}}</span>
+        <div class="px-3 py-4">
+          <button (click)="showProfileOpts($event)" *ngIf="this.loggedIn" class="profile flex items-center p-3 w-full rounded bg-light-tint">
+            <img
+            class="h-12 rounded-full"
+            src="assets/R.jpg"
+            >
+            <span id="profile-name" class="h-fit w-fit ml-4">{{this.userData.username}}</span>
+          </button>
         </div>
+
       </ion-footer>
     </ion-menu>
 

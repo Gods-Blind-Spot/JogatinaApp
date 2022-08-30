@@ -27,7 +27,7 @@ export class StorageService {
     (await this._storage).remove(key);
    }
 
-   async init() {
+   init() {
     const storage = this.storage.create();
     this._storage = storage;
   }

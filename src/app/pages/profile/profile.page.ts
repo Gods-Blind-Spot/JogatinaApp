@@ -1,4 +1,7 @@
+import { DatabaseService } from 'src/app/services/database.service';
+import { UserDetails } from 'src/app/interfaces/user-details';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+
+
+  selectedId: string;
+  user: UserDetails = {
+    id: '',
+    username: '',
+    fullname: '',
+    birthdate: undefined,
+    email: ''
+  };
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DatabaseService
+  ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(async params => {
+      this.user = await this.dataService.apiGet('users/' + params['id']) as UserDetails;
+    })
   }
 
 }

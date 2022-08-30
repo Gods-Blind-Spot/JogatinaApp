@@ -8,7 +8,7 @@ import { EAccountPages } from 'src/app/enum/all.enum';
 })
 export class AccountSignPage implements OnInit {
 
-  actualPage = EAccountPages.LOGIN.toString();
+  actualPage: EAccountPages = 'LOGIN'
 
   // TODO: Alternate state between login and register
   // TODO: Register page design
@@ -17,7 +17,7 @@ export class AccountSignPage implements OnInit {
 
   ngOnInit() {  }
 
-  showPage(pageToShow: string) {
+  showPage(pageToShow: EAccountPages) {
     console.log(pageToShow);
 
     this.actualPage = pageToShow;

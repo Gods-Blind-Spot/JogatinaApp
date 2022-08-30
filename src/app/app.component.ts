@@ -1,10 +1,11 @@
+import { ProfileOptsComponent } from './components/popover_components/profile-opts/profile-opts.component';
 import { AccountSignPage } from './modals/account-sign/account-sign.page';
 import { UiUtilsService } from './services/ui-utils.service';
 import { LoginData } from './interfaces/login-data';
 import { EStorage } from 'src/app/enum/all.enum';
 import { UserDetails } from 'src/app/interfaces/user-details';
 import { StorageService } from './services/storage.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { DatabaseService } from './services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit, OnChanges {
   };
 
   constructor(
+    private popoverCtrl: PopoverController,
     private storage: StorageService,
     private modalCtrl: ModalController,
     private auth: AuthService,
@@ -71,5 +73,24 @@ export class AppComponent implements OnInit, OnChanges {
       this.auth.logout();
       return;
     }
+  }
+
+  async showProfileOpts(e: Event) {
+    const profilePop = await this.popoverCtrl.create({
+      component: ProfileOptsComponent,
+      backdropDismiss: true,
+      showBackdrop: false,
+      reference: 'trigger',
+      side: 'top',
+      arrow: true,
+      event: e,
+      mode: 'ios',
+      alignment: 'start',
+
+      dismissOnSelect: true,
+      cssClass: 'profile-opts'
+    });
+
+    await profilePop.present();
   }
 }

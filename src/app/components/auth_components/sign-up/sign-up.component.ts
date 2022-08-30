@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 export class SignUpComponent implements OnInit {
 
   @Output()
-  registeredEvent = new EventEmitter();
+  registeredEvent = new EventEmitter<EAccountPages>();
 
   registerForm = this.formBuilder.group({
     fullname: new FormControl(null, [Validators.required]),
@@ -59,7 +59,7 @@ export class SignUpComponent implements OnInit {
     }).then(
       (data: UserDetails) => {
         if (data.id) {
-          this.registeredEvent.next(EAccountPages.LOGIN);
+          this.registeredEvent.next('LOGIN');
         }
       }
     );

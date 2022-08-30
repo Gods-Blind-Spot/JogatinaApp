@@ -1,0 +1,18 @@
+<nav class="text-xl p-4 bg-light-tint flex flex-col">
+
+  <ion-button class="flex justify-evenly" (click)="goToProfile()">
+    <ion-icon name="person-outline" slot="start"></ion-icon>
+    <p class="">perfil</p>
+  </ion-button>
+
+  <ion-button class="mt-4" (click)="goToConfig()">
+    <ion-icon name="settings-outline" slot="start"></ion-icon>
+    <p class="">configurações</p>
+  </ion-button>
+
+  <ion-button class="mt-4" (click)="logout()">
+    <ion-icon name="log-out-outline" slot="start"></ion-icon>
+    <p class="">log-out</p>
+  </ion-button>
+
+</nav>

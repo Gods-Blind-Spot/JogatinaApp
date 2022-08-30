@@ -22,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignInComponent implements OnInit {
 
   @Output()
-  loginEvent = new EventEmitter();
+  loginEvent = new EventEmitter<EAccountPages>();
 
   loginForm = this.formBuilder.group({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -38,7 +38,6 @@ export class SignInComponent implements OnInit {
     private modalCtrl: ModalController,
     private auth: AuthService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router
   ) { }
 
@@ -54,6 +53,6 @@ export class SignInComponent implements OnInit {
   }
 
   async reset() {
-    this.loginEvent.next(EAccountPages.FORGET);
+    this.loginEvent.next('FORGET');
   }
 }
